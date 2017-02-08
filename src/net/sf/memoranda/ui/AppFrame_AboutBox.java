@@ -103,7 +103,7 @@ public class AppFrame_AboutBox extends JDialog implements ActionListener {
     layeredPane.add(imgLabel, new Integer(1));
     layeredPane.add(lblText, new Integer(2));    
     layeredPane.add(button1, new Integer(2));
-    this.getContentPane().setBackground(new Color(251, 197, 63));
+    this.getContentPane().setBackground(new Color(119,119,119));
   }
   //Overridden so we can exit when window is closed
   protected void processWindowEvent(WindowEvent e) {
