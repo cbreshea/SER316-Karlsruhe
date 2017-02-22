@@ -139,7 +139,7 @@ public class PreferencesDialog extends JDialog {
 	JLabel baseFontSizeLabel = new JLabel();
 
 	public PreferencesDialog(Frame frame) {
-		super(frame, Local.getString("Preferences"), true);
+		super(frame, Local.getString("Preferences my guy"), true);
 		try {
 			jbInit();
 		} catch (Exception ex) {
@@ -278,7 +278,7 @@ public class PreferencesDialog extends JDialog {
 		gbc.anchor = GridBagConstraints.WEST;
 		GeneralPanel.add(closeHideRB, gbc);
 		jLabel3.setHorizontalAlignment(SwingConstants.RIGHT);
-		jLabel3.setText(Local.getString("Look and feel:"));
+		jLabel3.setText(Local.getString("Theme:"));
 		gbc = new GridBagConstraints();
 		gbc.gridx = 0;
 		gbc.gridy = 4;
@@ -298,6 +298,9 @@ public class PreferencesDialog extends JDialog {
 		gbc.insets = new Insets(2, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.WEST;
 		GeneralPanel.add(lfSystemRB, gbc);
+		lfGroup.add(lfCustomRB);
+		lfCustomRB.setText(Local.getString("Light Mode"));
+		
 
 		gbc = new GridBagConstraints();
 		gbc.gridx = 1;
@@ -306,20 +309,20 @@ public class PreferencesDialog extends JDialog {
 		gbc.anchor = GridBagConstraints.WEST;
 		GeneralPanel.add(lfJavaRB, gbc);
 		lfGroup.add(lfCustomRB);
-		lfCustomRB.setText(Local.getString("Custom"));
+		lfCustomRB.setText(Local.getString("Dark Mode"));
 		lfCustomRB.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				lfCustomRB_actionPerformed(e);
 			}
 		});
-		gbc = new GridBagConstraints();
-		gbc.gridx = 1;
-		gbc.gridy = 7;
-		gbc.insets = new Insets(2, 0, 0, 10);
-		gbc.anchor = GridBagConstraints.WEST;
+		//gbc = new GridBagConstraints();
+		//gbc.gridx = 1;
+		//gbc.gridy = 7;
+		//gbc.insets = new Insets(2, 0, 0, 10);
+		//gbc.anchor = GridBagConstraints.WEST;
 		GeneralPanel.add(lfCustomRB, gbc);
-		classNameLabel.setEnabled(false);
-		classNameLabel.setText(Local.getString("L&F class name:"));
+		//classNameLabel.setEnabled(false);
+		//classNameLabel.setText(Local.getString("L&F class name:"));
 		gbc = new GridBagConstraints();
 		gbc.gridx = 1;
 		gbc.gridy = 8;
