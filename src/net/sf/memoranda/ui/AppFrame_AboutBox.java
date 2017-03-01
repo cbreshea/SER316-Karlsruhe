@@ -94,8 +94,8 @@ public class AppFrame_AboutBox extends JDialog implements ActionListener {
     button1.setBounds(150, 415, 95, 30);
     button1.addActionListener(this);
     button1.setPreferredSize(new Dimension(95, 30));
-    button1.setBackground(new Color(69, 125, 186));
-    button1.setForeground(Color.white);
+    button1.setBackground(new Color(169, 169, 169));
+    button1.setForeground(Color.blue);
     layeredPane = getLayeredPane();
     //layeredPane.setPreferredSize(new Dimension(300, 300));
     imgLabel = new JLabel(image);
@@ -103,7 +103,7 @@ public class AppFrame_AboutBox extends JDialog implements ActionListener {
     layeredPane.add(imgLabel, new Integer(1));
     layeredPane.add(lblText, new Integer(2));    
     layeredPane.add(button1, new Integer(2));
-    this.getContentPane().setBackground(new Color(119,119,119));
+    this.getContentPane().setBackground(new Color(169,169,169));
   }
   //Overridden so we can exit when window is closed
   protected void processWindowEvent(WindowEvent e) {

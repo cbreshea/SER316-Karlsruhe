@@ -1,6 +1,7 @@
 package net.sf.memoranda.ui;
 
 import java.io.File;
+
 import java.util.Vector;
 
 import net.sf.memoranda.util.Configuration;
@@ -12,7 +13,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.event.*;
-
+import javax.swing.ButtonGroup;
 /*$Id: PreferencesDialog.java,v 1.16 2006/06/28 22:58:31 alexeya Exp $*/
 public class PreferencesDialog extends JDialog {
 	JPanel topPanel = new JPanel(new BorderLayout());
@@ -50,6 +51,8 @@ public class PreferencesDialog extends JDialog {
 	JRadioButton lfJavaRB = new JRadioButton();
 
 	JRadioButton lfCustomRB = new JRadioButton();
+	
+	JRadioButton lfLightRB = new JRadioButton();
 
 	JLabel classNameLabel = new JLabel();
 
@@ -286,20 +289,32 @@ public class PreferencesDialog extends JDialog {
 		gbc.anchor = GridBagConstraints.EAST;
 		GeneralPanel.add(jLabel3, gbc);
 
+		/*
 		gbc = new GridBagConstraints();
 		gbc.gridx = 1;
 		gbc.gridy = 4;
 		gbc.insets = new Insets(2, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.WEST;
+		GeneralPanel.add(lfSystemRB, gbc);
+		lfGroup.add(lfCustomRB);
+		lfCustomRB.setText(Local.getString("Light Mode"));
+		*/
 
 		gbc = new GridBagConstraints();
 		gbc.gridx = 1;
 		gbc.gridy = 5;
 		gbc.insets = new Insets(2, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.WEST;
-		GeneralPanel.add(lfSystemRB, gbc);
-		lfGroup.add(lfCustomRB);
-		lfCustomRB.setText(Local.getString("Light Mode"));
+		lfGroup.add(lfLightRB);
+		lfLightRB.setSelected(true);
+		lfLightRB.setText(Local.getString("Light Mode"));
+		lfCustomRB.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				lfCustomRB_actionPerformed(e);
+			}
+		});
+		GeneralPanel.add(lfLightRB, gbc);
+		
 		
 
 		gbc = new GridBagConstraints();
@@ -307,7 +322,6 @@ public class PreferencesDialog extends JDialog {
 		gbc.gridy = 6;
 		gbc.insets = new Insets(2, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.WEST;
-		GeneralPanel.add(lfJavaRB, gbc);
 		lfGroup.add(lfCustomRB);
 		lfCustomRB.setText(Local.getString("Dark Mode"));
 		lfCustomRB.addActionListener(new java.awt.event.ActionListener() {
@@ -336,7 +350,7 @@ public class PreferencesDialog extends JDialog {
 		gbc.insets = new Insets(7, 20, 0, 10);
 		gbc.anchor = GridBagConstraints.WEST;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
-		GeneralPanel.add(lfClassName, gbc);
+		//GeneralPanel.add(lfClassName, gbc);
 		jLabel4.setHorizontalAlignment(SwingConstants.RIGHT);
 		jLabel4.setText(Local.getString("Startup:"));
 		gbc = new GridBagConstraints();
@@ -778,6 +792,8 @@ public class PreferencesDialog extends JDialog {
 
 	void lfCustomRB_actionPerformed(ActionEvent e) {
 		this.enableCustomLF(true);
+		//AgendaPanel agpanel = new AgendaPanel();
+		//agpanel.scrollPane.getViewport().setBackground(Color.white);
 	}
 
 	void enSystrayChB_actionPerformed(ActionEvent e) {
