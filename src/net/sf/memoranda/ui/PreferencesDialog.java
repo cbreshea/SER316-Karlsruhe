@@ -16,6 +16,9 @@ import java.awt.event.*;
 import javax.swing.ButtonGroup;
 /*$Id: PreferencesDialog.java,v 1.16 2006/06/28 22:58:31 alexeya Exp $*/
 public class PreferencesDialog extends JDialog {
+
+	private AgendaPanel ag;
+	
 	JPanel topPanel = new JPanel(new BorderLayout());
 
 	JTabbedPane tabbedPanel = new JTabbedPane();
@@ -142,7 +145,7 @@ public class PreferencesDialog extends JDialog {
 	JLabel baseFontSizeLabel = new JLabel();
 
 	public PreferencesDialog(Frame frame) {
-		super(frame, Local.getString("Preferences my guy"), true);
+		super(frame, Local.getString("Preferences"), true);
 		try {
 			jbInit();
 		} catch (Exception ex) {
@@ -299,7 +302,7 @@ public class PreferencesDialog extends JDialog {
 		lfGroup.add(lfCustomRB);
 		lfCustomRB.setText(Local.getString("Light Mode"));
 		*/
-
+		
 		gbc = new GridBagConstraints();
 		gbc.gridx = 1;
 		gbc.gridy = 5;
@@ -308,12 +311,17 @@ public class PreferencesDialog extends JDialog {
 		lfGroup.add(lfLightRB);
 		lfLightRB.setSelected(true);
 		lfLightRB.setText(Local.getString("Light Mode"));
-		lfCustomRB.addActionListener(new java.awt.event.ActionListener() {
+		GeneralPanel.add(lfLightRB, gbc);
+		lfLightRB.addActionListener(new java.awt.event.ActionListener() {
+			
+			@Override
 			public void actionPerformed(ActionEvent e) {
-				lfCustomRB_actionPerformed(e);
+				
+				
+				//action happens, switches to light mode
 			}
 		});
-		GeneralPanel.add(lfLightRB, gbc);
+		//GeneralPanel.add(lfLightRB, gbc);
 		
 		
 
@@ -323,10 +331,11 @@ public class PreferencesDialog extends JDialog {
 		gbc.insets = new Insets(2, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.WEST;
 		lfGroup.add(lfCustomRB);
+		//lfCustomRB.setSelected(true);
 		lfCustomRB.setText(Local.getString("Dark Mode"));
 		lfCustomRB.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				lfCustomRB_actionPerformed(e);
+				// action happens, goes to dark mode
 			}
 		});
 		//gbc = new GridBagConstraints();
@@ -910,4 +919,10 @@ public class PreferencesDialog extends JDialog {
             fonts.add(envfonts[i]);
 		return fonts;
 	}
+}
+	public boolean lightModeOn(){
+		lightMode = true;
+		return lightMode;
+	}
+	
 }

@@ -1,6 +1,7 @@
 package net.sf.memoranda.ui;
 
 import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -230,8 +231,8 @@ public class AgendaPanel extends JPanel {
 		historyForwardB.setText("");
 
 		this.setLayout(borderLayout1);
-		scrollPane.getViewport().setBackground(Color.gray);
-
+		
+		setColor();
 		scrollPane.getViewport().add(viewer, null);
 		this.add(scrollPane, BorderLayout.CENTER);
 		toolBar.add(historyBackB, null);
@@ -354,4 +355,10 @@ public class AgendaPanel extends JPanel {
 	//		}
 	//
 	//    }
+	public void setColor(){
+		
+		scrollPane.getViewport().setBackground(Color.white);
+
+	
+	}
 }

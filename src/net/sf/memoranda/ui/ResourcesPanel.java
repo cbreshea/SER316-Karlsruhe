@@ -92,7 +92,7 @@ public class ResourcesPanel extends JPanel {
             new ImageIcon(
                 net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/removeresource.png")));
         removeResB.setEnabled(false);
-        scrollPane.getViewport().setBackground(Color.white);
+        scrollPane.getViewport().setBackground(Color.darkGray);
         toolBar.addSeparator(new Dimension(8, 24));
         toolBar.addSeparator(new Dimension(8, 24));
 
