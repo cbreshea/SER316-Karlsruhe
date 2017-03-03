@@ -16,6 +16,7 @@ import java.awt.event.*;
 import javax.swing.ButtonGroup;
 /*$Id: PreferencesDialog.java,v 1.16 2006/06/28 22:58:31 alexeya Exp $*/
 public class PreferencesDialog extends JDialog {
+	int lightMode=0;
 
 	private AgendaPanel ag;
 	
@@ -53,7 +54,7 @@ public class PreferencesDialog extends JDialog {
 
 	JRadioButton lfJavaRB = new JRadioButton();
 
-	JRadioButton lfCustomRB = new JRadioButton();
+	JRadioButton lfDarkRB = new JRadioButton();
 	
 	JRadioButton lfLightRB = new JRadioButton();
 
@@ -292,60 +293,43 @@ public class PreferencesDialog extends JDialog {
 		gbc.anchor = GridBagConstraints.EAST;
 		GeneralPanel.add(jLabel3, gbc);
 
-		/*
+		
 		gbc = new GridBagConstraints();
 		gbc.gridx = 1;
 		gbc.gridy = 4;
 		gbc.insets = new Insets(2, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.WEST;
-		GeneralPanel.add(lfSystemRB, gbc);
-		lfGroup.add(lfCustomRB);
-		lfCustomRB.setText(Local.getString("Light Mode"));
-		*/
-		
+		lfGroup.add(lfLightRB);
+		lfLightRB.setText(Local.getString("Light Mode"));
+		GeneralPanel.add(lfLightRB, gbc);
+		lfLightRB.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				lfLightRB_actionPerformed(e);
+
+				lightMode = 1;
+				
+			}
+		});
+
 		gbc = new GridBagConstraints();
 		gbc.gridx = 1;
 		gbc.gridy = 5;
 		gbc.insets = new Insets(2, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.WEST;
-		lfGroup.add(lfLightRB);
-		lfLightRB.setSelected(true);
-		lfLightRB.setText(Local.getString("Light Mode"));
-		GeneralPanel.add(lfLightRB, gbc);
-		lfLightRB.addActionListener(new java.awt.event.ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				
-				//action happens, switches to light mode
-			}
-		});
-		//GeneralPanel.add(lfLightRB, gbc);
+		lfGroup.add(lfDarkRB);
+		lfDarkRB.setText(Local.getString("Dark Mode"));
+		GeneralPanel.add(lfDarkRB, gbc);
+		lfDarkRB.addActionListener(new java.awt.event.ActionListener() {
 		
-		
-
-		gbc = new GridBagConstraints();
-		gbc.gridx = 1;
-		gbc.gridy = 6;
-		gbc.insets = new Insets(2, 0, 0, 10);
-		gbc.anchor = GridBagConstraints.WEST;
-		lfGroup.add(lfCustomRB);
-		//lfCustomRB.setSelected(true);
-		lfCustomRB.setText(Local.getString("Dark Mode"));
-		lfCustomRB.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				lfDarkRB_actionPerformed(e);
+				lightMode = 0;
+		
 				// action happens, goes to dark mode
 			}
 		});
-		//gbc = new GridBagConstraints();
-		//gbc.gridx = 1;
-		//gbc.gridy = 7;
-		//gbc.insets = new Insets(2, 0, 0, 10);
-		//gbc.anchor = GridBagConstraints.WEST;
-		GeneralPanel.add(lfCustomRB, gbc);
-		//classNameLabel.setEnabled(false);
-		//classNameLabel.setText(Local.getString("L&F class name:"));
+		
 		gbc = new GridBagConstraints();
 		gbc.gridx = 1;
 		gbc.gridy = 8;
@@ -566,11 +550,15 @@ public class PreferencesDialog extends JDialog {
 		else if (lf.equalsIgnoreCase("default"))
 			lfJavaRB.setSelected(true);
 		else if (lf.length() > 0) {
-			lfCustomRB.setSelected(true);
+			lfDarkRB.setSelected(true);
+			lightMode = 0;
 			enableCustomLF(true);
 			lfClassName.setText(lf);
-		} else
-			lfJavaRB.setSelected(true);
+		} 
+		else{
+			lfLightRB.setSelected(true);
+			lightMode = 1;
+		}
 
 		askConfirmChB.setSelected(!Configuration.get("ASK_ON_EXIT").toString()
 				.equalsIgnoreCase("no"));
@@ -581,6 +569,19 @@ public class PreferencesDialog extends JDialog {
 		} else {
 			this.closeHideRB.setSelected(true);
 			// this.askConfirmChB.setEnabled(false);
+		}
+		
+	
+		if (lf.equals("dark")) {
+			this.lfDarkRB.setSelected(true);	
+			lightMode = 0;
+			
+			//this.askConfirmChB.setEnabled(true);
+		} 
+		else {
+			this.lfLightRB.setSelected(true);
+			lightMode = 1;
+			//this.askConfirmChB.setEnabled(false);
 		}
 
 		String onmin = Configuration.get("ON_MINIMIZE").toString();
@@ -676,12 +677,11 @@ public class PreferencesDialog extends JDialog {
 		String lf = Configuration.get("LOOK_AND_FEEL").toString();
 		String newlf = "";
 
-		if (this.lfSystemRB.isSelected())
-			newlf = "system";
-		else if (this.lfJavaRB.isSelected())
-			newlf = "default";
-		else if (this.lfCustomRB.isSelected())
-			newlf = this.lfClassName.getText();
+		 if (this.lfDarkRB.isSelected())
+			Configuration.put("LOOK_AND_FEEL","dark");
+		 
+		else if (this.lfLightRB.isSelected())
+			Configuration.put("LOOK_AND_FEEL","light");
 
 		if (!lf.equalsIgnoreCase(newlf)) {
 			Configuration.put("LOOK_AND_FEEL", newlf);
@@ -799,12 +799,17 @@ public class PreferencesDialog extends JDialog {
 		this.enableCustomLF(false);
 	}
 
-	void lfCustomRB_actionPerformed(ActionEvent e) {
+	void lfDarkRB_actionPerformed(ActionEvent e) {
+		
 		this.enableCustomLF(true);
+		lightMode = 2;
 		//AgendaPanel agpanel = new AgendaPanel();
 		//agpanel.scrollPane.getViewport().setBackground(Color.white);
 	}
-
+	
+	void lfLightRB_actionPerformed(ActionEvent e){
+	
+	}
 	void enSystrayChB_actionPerformed(ActionEvent e) {
 
 	}
@@ -919,10 +924,11 @@ public class PreferencesDialog extends JDialog {
             fonts.add(envfonts[i]);
 		return fonts;
 	}
-}
-	public boolean lightModeOn(){
-		lightMode = true;
-		return lightMode;
-	}
+
 	
+	 int lightModeStatus(){
+		 lightMode = lightMode;
+		 return lightMode;
+	 }
 }
+	

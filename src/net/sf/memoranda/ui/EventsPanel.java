@@ -37,6 +37,7 @@ import net.sf.memoranda.util.Util;
 
 /*$Id: EventsPanel.java,v 1.25 2005/02/19 10:06:25 rawsushi Exp $*/
 public class EventsPanel extends JPanel {
+	PreferencesDialog pd = new PreferencesDialog();
     BorderLayout borderLayout1 = new BorderLayout();
     JButton historyBackB = new JButton();
     JToolBar eventsToolBar = new JToolBar();
@@ -133,7 +134,8 @@ public class EventsPanel extends JPanel {
 
         this.setLayout(borderLayout1);
         
-        scrollPane.getViewport().setBackground(Color.darkGray);
+        setColor();
+        //scrollPane.getViewport().setBackground(Color.darkGray);
         
         eventsTable.setMaximumSize(new Dimension(32767, 32767));
         eventsTable.setRowHeight(24);
@@ -461,4 +463,14 @@ public class EventsPanel extends JPanel {
     void ppNewEvent_actionPerformed(ActionEvent e) {
         newEventB_actionPerformed(e);
     }
+	public void setColor(){
+		if (pd.lightMode==1){
+			scrollPane.getViewport().setBackground(Color.white);
+		}
+		else{
+			scrollPane.getViewport().setBackground(Color.darkGray);
+		}
+
+	
+	}
 }

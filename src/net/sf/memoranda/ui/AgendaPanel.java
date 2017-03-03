@@ -1,5 +1,7 @@
 package net.sf.memoranda.ui;
 
+
+
 import java.awt.BorderLayout;
 
 import java.awt.Color;
@@ -43,6 +45,7 @@ import nu.xom.Element;
 
 /*$Id: AgendaPanel.java,v 1.11 2005/02/15 16:58:02 rawsushi Exp $*/
 public class AgendaPanel extends JPanel {
+	PreferencesDialog pd = new PreferencesDialog();
 	BorderLayout borderLayout1 = new BorderLayout();
 	JButton historyBackB = new JButton();
 	JToolBar toolBar = new JToolBar();
@@ -231,8 +234,10 @@ public class AgendaPanel extends JPanel {
 		historyForwardB.setText("");
 
 		this.setLayout(borderLayout1);
+		//sets theme color
+		int x = pd.lightMode;
+		setColor(x);
 		
-		setColor();
 		scrollPane.getViewport().add(viewer, null);
 		this.add(scrollPane, BorderLayout.CENTER);
 		toolBar.add(historyBackB, null);
@@ -311,54 +316,20 @@ public class AgendaPanel extends JPanel {
 		isActive = isa;
 	}
 
-	//	void toggleShowActiveOnly_actionPerformed(ActionEvent e) {
-	//		Context.put(
-	//			"SHOW_ACTIVE_TASKS_ONLY",
-	//			new Boolean(ppShowActiveOnlyChB.isSelected()));
-	//		/*if (taskTable.isShowActiveOnly()) {
-	//			// is true, toggle to false
-	//			taskTable.setShowActiveOnly(false);
-	//			//showActiveOnly.setToolTipText(Local.getString("Show Active Only"));			
-	//		}
-	//		else {
-	//			// is false, toggle to true
-	//			taskTable.setShowActiveOnly(true);
-	//			showActiveOnly.setToolTipText(Local.getString("Show All"));			
-	//		}*/	    
-	//		refresh(CurrentDate.get());
-	////		parentPanel.updateIndicators();
-	//		//taskTable.updateUI();
-	//	}
 
-	//    class PopupListener extends MouseAdapter {
-	//
-	//        public void mouseClicked(MouseEvent e) {
-	//        	System.out.println("mouse clicked!");
-	////			if ((e.getClickCount() == 2) && (taskTable.getSelectedRow() > -1))
-	////				editTaskB_actionPerformed(null);
-	//		}
-	//
-	//		public void mousePressed(MouseEvent e) {
-	//        	System.out.println("mouse pressed!");
-	//			maybeShowPopup(e);
-	//		}
-	//
-	//		public void mouseReleased(MouseEvent e) {
-	//        	System.out.println("mouse released!");
-	//			maybeShowPopup(e);
-	//		}
-	//
-	//		private void maybeShowPopup(MouseEvent e) {
-	//			if (e.isPopupTrigger()) {
-	//				agendaPPMenu.show(e.getComponent(), e.getX(), e.getY());
-	//			}
-	//		}
-	//
-	//    }
-	public void setColor(){
-		
-		scrollPane.getViewport().setBackground(Color.white);
+	public void setColor(int x){
+		if (x ==0){
+			scrollPane.getViewport().setBackground(Color.white);
+		}
+		else{
+			scrollPane.getViewport().setBackground(Color.darkGray);
+		}
 
 	
 	}
-}
+
+	
+	
+}//end class
+
+
