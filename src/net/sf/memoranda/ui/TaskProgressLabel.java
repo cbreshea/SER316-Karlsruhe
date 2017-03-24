@@ -43,7 +43,7 @@ import javax.swing.JLabel;
 
 class TaskProgressLabel extends JLabel{
     TaskTable table;
-    int column;
+    int column; 
     Task task;
     public TaskProgressLabel( TaskTable table ){
         this.table = table;
@@ -58,7 +58,7 @@ class TaskProgressLabel extends JLabel{
         int height = table.getRowHeight();
         int p = width * val / 100;
         
-        g.setColor(Color.black);
+        g.setColor(Color.white);
         g.fillRect(0,0,width, height);
 
         g.setColor( TaskTreeTableCellRenderer.getColorForTaskStatus(task, true) );

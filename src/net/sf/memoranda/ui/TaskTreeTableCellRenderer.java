@@ -97,7 +97,30 @@ public class TaskTreeTableCellRenderer extends DefaultTreeCellRenderer implement
         }
         // default values
         // label.setOpaque(true);
-        label.setForeground(Color.BLACK);
+        
+        	//label.setForeground(Color.BLUE);
+        switch (t.getPriority()) {
+        case Task.PRIORITY_NORMAL:
+           label.setForeground(Color.GREEN);
+           break;
+        case Task.PRIORITY_HIGHEST:
+           label.setForeground(Color.RED);
+           break;
+        case Task.PRIORITY_HIGH:
+            label.setForeground(new Color(255,153,0));
+            break;
+        case Task.PRIORITY_LOW:
+            label.setForeground(new Color(51,51,204));
+            break;
+        case Task.PRIORITY_LOWEST:
+            label.setForeground(new Color(102,102,153));
+            break;
+        default:
+        	label.setForeground(Color.BLACK);
+        	break;
+        }
+
+
         label.setIcon(null);
        // label.setToolTipText(t.getDescription()); //XXX Disabled because of bug 1596966
         applyFont(t, label);
@@ -204,7 +227,6 @@ public class TaskTreeTableCellRenderer extends DefaultTreeCellRenderer implement
             case Task.FAILED:
                 return new Color(255, 192, 192);
             case Task.COMPLETED:
-                return new Color(230, 255, 230);
             }
         } else {
             switch (t.getStatus(CurrentDate.get())) {
@@ -260,3 +282,4 @@ public class TaskTreeTableCellRenderer extends DefaultTreeCellRenderer implement
     
     
 }
+
