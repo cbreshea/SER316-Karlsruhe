@@ -128,7 +128,7 @@ public class AgendaPanel extends JPanel {
 							CurrentStorage.get().storeEventsManager();
 						}
 						refresh(CurrentDate.get());
-						System.out.println("agregué un sticker");
+						System.out.println("add a sticker");
 					} else if (d.startsWith("memoranda:expandsubtasks")) {
 						String id = d.split("#")[1];
 						gotoTask = id;
@@ -196,18 +196,18 @@ public class AgendaPanel extends JPanel {
 					}else if (d.startsWith("memoranda:exportstickerst")) {
 						 /*  Falta agregar el exportar sticker mientras tanto..*/
 						 final JFrame parent = new JFrame();
-						 String name = JOptionPane.showInputDialog(parent,Local.getString("Ingrese nombre de archivo a exportar"),null);
+						 String name = JOptionPane.showInputDialog(parent,Local.getString("Enter file name to export"),null);
 						 new ExportSticker(name).export("txt");
 						 //JOptionPane.showMessageDialog(null,name);
 					}else if (d.startsWith("memoranda:exportstickersh")) {
 						 /*  Falta agregar el exportar sticker mientras tanto..*/
 						 final JFrame parent = new JFrame();
-						 String name = JOptionPane.showInputDialog(parent,Local.getString("Ingrese nombre de archivo a exportar"),null);
+						 String name = JOptionPane.showInputDialog(parent,Local.getString("Enter file name to export"),null);
 						 new ExportSticker(name).export("html");
 						 //JOptionPane.showMessageDialog(null,name);
 					}else if (d.startsWith("memoranda:importstickers")) {
 						final JFrame parent = new JFrame();
-						String name = JOptionPane.showInputDialog(parent,Local.getString("Ingrese nombre de archivo a importar"),null);
+						String name = JOptionPane.showInputDialog(parent,Local.getString("Enter file name to import"),null);
 						new ImportSticker(name).import_file();
 					}
 				}
@@ -322,7 +322,7 @@ public class AgendaPanel extends JPanel {
 			scrollPane.getViewport().setBackground(Color.white);
 		}
 		else{
-			scrollPane.getViewport().setBackground(Color.darkGray);
+			scrollPane.getViewport().setBackground(Color.white);
 		}
 
 	

@@ -199,7 +199,7 @@ public class TaskPanel extends JPanel {
         this.setLayout(borderLayout1);
         
         
-        scrollPane.getViewport().setBackground(Color.darkGray);
+        scrollPane.getViewport().setBackground(Color.white);
        
       
         ppEditTask.setFont(new java.awt.Font("Dialog", 1, 11));

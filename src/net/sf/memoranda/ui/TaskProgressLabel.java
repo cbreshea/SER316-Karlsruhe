@@ -58,7 +58,7 @@ class TaskProgressLabel extends JLabel{
         int height = table.getRowHeight();
         int p = width * val / 100;
         
-        g.setColor(Color.WHITE);
+        g.setColor(Color.black);
         g.fillRect(0,0,width, height);
 
         g.setColor( TaskTreeTableCellRenderer.getColorForTaskStatus(task, true) );
