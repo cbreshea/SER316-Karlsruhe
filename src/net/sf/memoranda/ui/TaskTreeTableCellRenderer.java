@@ -101,7 +101,7 @@ public class TaskTreeTableCellRenderer extends DefaultTreeCellRenderer implement
         	//label.setForeground(Color.BLUE);
         switch (t.getPriority()) {
         case Task.PRIORITY_NORMAL:
-           label.setForeground(Color.GREEN);
+           label.setForeground(new Color (34,139,34));
            break;
         case Task.PRIORITY_HIGHEST:
            label.setForeground(Color.RED);
