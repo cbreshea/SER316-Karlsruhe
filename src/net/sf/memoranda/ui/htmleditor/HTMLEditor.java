@@ -58,13 +58,8 @@ import javax.swing.undo.UndoManager;
 import net.sf.memoranda.ui.ExceptionDialog;
 import net.sf.memoranda.ui.htmleditor.util.Local;
 
-/**
- *
- */
 public class HTMLEditor extends JPanel {
-	/**
-	 *
-	 */
+
 	private static final long serialVersionUID = -8356659089345463381L;
 
 	public HTMLEditorPane editor = new HTMLEditorPane("");
@@ -97,9 +92,7 @@ public class HTMLEditor extends JPanel {
 	}
 
 	abstract class HTMLEditorAction extends AbstractAction {
-		/**
-		 *
-		 */
+	
 		private static final long serialVersionUID = -8901937330612009685L;
 
 		HTMLEditorAction(String name, ImageIcon icon) {
@@ -115,9 +108,7 @@ public class HTMLEditor extends JPanel {
 
 	public Action boldAction = new HTMLEditorAction(Local.getString("Bold"),
 			new ImageIcon(cl.getResource("resources/icons/bold.png"))) {
-		/**
-				 *
-				 */
+
 		private static final long serialVersionUID = 851265550348425881L;
 
 		public void actionPerformed(ActionEvent e) {
@@ -127,9 +118,7 @@ public class HTMLEditor extends JPanel {
 
 	public Action italicAction = new HTMLEditorAction(Local.getString("Italic"),
 			new ImageIcon(cl.getResource("resources/icons/italic.png"))) {
-		/**
-				 *
-				 */
+	
 		private static final long serialVersionUID = 2521675222721555271L;
 
 		public void actionPerformed(ActionEvent e) {
@@ -139,9 +128,7 @@ public class HTMLEditor extends JPanel {
 
 	public Action underAction = new HTMLEditorAction(Local.getString("Underline"),
 			new ImageIcon(cl.getResource("resources/icons/underline.png"))) {
-		/**
-				 *
-				 */
+
 		private static final long serialVersionUID = 8814021351258585063L;
 
 		public void actionPerformed(ActionEvent e) {
@@ -151,9 +138,7 @@ public class HTMLEditor extends JPanel {
 
 	public Action ulAction = new HTMLEditorAction(Local.getString("Unordered list"),
 			new ImageIcon(cl.getResource("resources/icons/listunordered.png"))) {
-		/**
-					 *
-					 */
+
 		private static final long serialVersionUID = 796620549444932108L;
 
 		public void actionPerformed(ActionEvent e) {
@@ -163,9 +148,7 @@ public class HTMLEditor extends JPanel {
 
 	public Action olAction = new HTMLEditorAction(Local.getString("Ordered list"),
 			new ImageIcon(cl.getResource("resources/icons/listordered.png"))) {
-		/**
-				 *
-				 */
+
 		private static final long serialVersionUID = -6523950595631821050L;
 
 		public void actionPerformed(ActionEvent e) {
@@ -175,9 +158,7 @@ public class HTMLEditor extends JPanel {
 
 	public Action lAlignAction = new HTMLEditorAction(Local.getString("Align left"),
 			new ImageIcon(cl.getResource("resources/icons/alignleft.png"))) {
-		/**
-				 *
-				 */
+
 		private static final long serialVersionUID = 226777616529141974L;
 
 		public void actionPerformed(ActionEvent e) {
@@ -187,9 +168,6 @@ public class HTMLEditor extends JPanel {
 
 	public Action cAlignAction = new HTMLEditorAction(Local.getString("Align center"),
 			new ImageIcon(cl.getResource("resources/icons/aligncenter.png"))) {
-		/**
-				 *
-				 */
 		private static final long serialVersionUID = 808377713077241274L;
 
 		public void actionPerformed(ActionEvent e) {
@@ -199,9 +177,7 @@ public class HTMLEditor extends JPanel {
 
 	public Action rAlignAction = new HTMLEditorAction(Local.getString("Align right"),
 			new ImageIcon(cl.getResource("resources/icons/alignright.png"))) {
-		/**
-				 *
-				 */
+
 		private static final long serialVersionUID = -2375080260677950497L;
 
 		public void actionPerformed(ActionEvent e) {
@@ -211,9 +187,7 @@ public class HTMLEditor extends JPanel {
 
 	public Action imageAction = new HTMLEditorAction(Local.getString("Insert image"),
 			new ImageIcon(cl.getResource("resources/icons/image.png"))) {
-		/**
-				 *
-				 */
+
 		private static final long serialVersionUID = 4953413587637655489L;
 
 		public void actionPerformed(ActionEvent e) {
@@ -223,9 +197,7 @@ public class HTMLEditor extends JPanel {
 
 	public Action tableAction = new HTMLEditorAction(Local.getString("Insert table"),
 			new ImageIcon(cl.getResource("resources/icons/table.png"))) {
-		/**
-				 *
-				 */
+
 		private static final long serialVersionUID = 2580524158085055029L;
 
 		public void actionPerformed(ActionEvent e) {
@@ -235,9 +207,7 @@ public class HTMLEditor extends JPanel {
 
 	public Action linkAction = new HTMLEditorAction(Local.getString("Insert hyperlink"),
 			new ImageIcon(cl.getResource("resources/icons/link.png"))) {
-		/**
-				 *
-				 */
+
 		private static final long serialVersionUID = -2590348478619094228L;
 
 		public void actionPerformed(ActionEvent e) {
@@ -1416,8 +1386,9 @@ public class HTMLEditor extends JPanel {
 					if (editor.getCaretPosition() == document.getLength())
 						imgTag += "&nbsp;";
 					editorKit.insertHTML(document, editor.getCaretPosition(), imgTag, 0, 0, HTML.Tag.A);
-				} else
+				} else{
 					editorKit.insertHTML(document, editor.getCaretPosition(), imgTag, 0, 0, HTML.Tag.IMG);
+				}
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}

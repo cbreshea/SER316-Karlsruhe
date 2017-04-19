@@ -15,15 +15,13 @@ import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 import net.sf.memoranda.ui.htmleditor.util.Local;
-/**
- *
- */
+
 public class Finder extends Thread {
 
     Pattern pattern;
-    String _find = null;
+    String find_1 = null;
     String dispText = "";
-    String _replace = null;
+    String replace_1 = null;
     HTMLEditor editor;
 
     /**
@@ -42,19 +40,19 @@ public class Finder extends Thread {
         int flags = Pattern.DOTALL;
         if (!matchCase)
             flags = flags + Pattern.CASE_INSENSITIVE + Pattern.UNICODE_CASE;
-        _find = find;
+        find_1 = find;
         if (!regexp)
-            _find = "\\Q" + _find + "\\E";
+            find_1 = "\\Q" + find_1 + "\\E";
         if (wholeWord)
-            _find = "[\\s\\p{Punct}]" + _find + "[\\s\\p{Punct}]";
+            find_1 = "[\\s\\p{Punct}]" + find_1 + "[\\s\\p{Punct}]";
         try {
-            pattern = Pattern.compile(_find, flags);
+            pattern = Pattern.compile(find_1, flags);
         }
         catch (Exception ex) {
             ex.printStackTrace();
             pattern = null;
         }
-        _replace = replace;
+        replace_1 = replace;
     }
 
     public Finder(HTMLEditor theEditor, String find, boolean wholeWord, boolean matchCase, boolean regexp) {
@@ -81,7 +79,7 @@ public class Finder extends Thread {
             editor.editor.requestFocus();
             editor.editor.setCaretPosition(matcher.end());
             editor.editor.select(matcher.start(), matcher.end());
-            if (_replace != null) {
+            if (replace_1 != null) {
                 if (!replaceAll) {
                     ReplaceOptionsDialog dlg = new ReplaceOptionsDialog(Local.getString("Replace this occurence?"));
                     Dimension dlgSize = new Dimension(400, 150);
@@ -95,12 +93,12 @@ public class Finder extends Thread {
                     dlg.setVisible(true);
                     int op = dlg.option;
                     if (op == ReplaceOptionsDialog.YES_OPTION) {
-                        editor.editor.replaceSelection(_replace);
-                        start = matcher.start() + _replace.length();
+                        editor.editor.replaceSelection(replace_1);
+                        start = matcher.start() + replace_1.length();
                     }
                     else if (op == ReplaceOptionsDialog.YES_TO_ALL_OPTION) {
-                        editor.editor.replaceSelection(_replace);
-                        start = matcher.start() + _replace.length();
+                        editor.editor.replaceSelection(replace_1);
+                        start = matcher.start() + replace_1.length();
                         replaceAll = true;
                     }
                     else if (op == ReplaceOptionsDialog.CANCEL_OPTION)
@@ -109,8 +107,8 @@ public class Finder extends Thread {
                         start = matcher.end();
                 }
                 else {
-                    editor.editor.replaceSelection(_replace);
-                    start = matcher.start() + _replace.length();
+                    editor.editor.replaceSelection(replace_1);
+                    start = matcher.start() + replace_1.length();
                 }
             }
             else {
