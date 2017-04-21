@@ -609,8 +609,13 @@ public class PreferencesDialog extends JDialog {
 		gbc.anchor = GridBagConstraints.WEST;
 		// populate with languages
 		HashMap<String, String> languageTags = Local.languageTags;
+		
+		//Safety
+		assert(languageTags.size() > 0) : "Empty language tags has been detected";
 		for (String s : languageTags.keySet()) {
 			cmb_language.addItem(s);
+			//Safety
+			assert(cmb_language.getItemCount() > 0) : "Empty language tags has been detected";
 		}
 
 		// Build Tab2
@@ -760,10 +765,13 @@ public class PreferencesDialog extends JDialog {
 	}
 
 	void apply() {
-		if (this.cmb_firstDay.getSelectedIndex() == 0)
+		if (this.cmb_firstDay.getSelectedIndex() == 0){
 			Configuration.put("FIRST_DAY_OF_WEEK", "mon");
-		else
+		}
+		else{
 			Configuration.put("FIRST_DAY_OF_WEEK", "sun");
+		}
+		assert(!Configuration.get("FIRST_DAY_OF_WEEK").toString().isEmpty()):"Empty value in FIRST_DAY_OF_WEEK";
 
 		if (this.cb_locale.isSelected()){
 			Configuration.put("DISABLE_L10N", "no");
@@ -771,42 +779,55 @@ public class PreferencesDialog extends JDialog {
 		else{
 			Configuration.put("DISABLE_L10N", "yes");
 		}
-
-		if (this.cb_splash.isSelected())
+		assert(!Configuration.get("DISABLE_L10N").toString().isEmpty()):"Empty value in DISABLE_L10N";
+		
+		if (this.cb_splash.isSelected()){
 			Configuration.put("SHOW_SPLASH", "yes");
-		else
+		}
+		else{
 			Configuration.put("SHOW_SPLASH", "no");
-
+		}
+		assert(!Configuration.get("SHOW_SPLASH").toString().isEmpty()):"Empty value in SHOW_SPLASH";
+		
 		if (this.cb_trayIcon.isSelected()){
 			Configuration.put("DISABLE_SYSTRAY", "no");
 		}
 		else{
 			Configuration.put("DISABLE_SYSTRAY", "yes");
 		}
-
-		if (this.cb_startMin.isSelected())
+		assert(!Configuration.get("DISABLE_SYSTRAY").toString().isEmpty()):"Empty value in DISABLE_SYSTRAY";
+		
+		if (this.cb_startMin.isSelected()){
 			Configuration.put("START_MINIMIZED", "yes");
-		else
+		}
+		else{
 			Configuration.put("START_MINIMIZED", "no");
-
-		if (this.cb_AskOnExit.isSelected())
+		}
+		assert(!Configuration.get("START_MINIMIZED").toString().isEmpty()):"Empty value in START_MINIMIZED";
+		
+		if (this.cb_AskOnExit.isSelected()){
 			Configuration.put("ASK_ON_EXIT", "yes");
-		else
+		}
+		else{
 			Configuration.put("ASK_ON_EXIT", "no");
-
+		}
+		assert(!Configuration.get("ASK_ON_EXIT").toString().isEmpty()):"Empty value in ASK_ON_EXIT";
+		
 		if (this.cmb_closeAction.getSelectedIndex() == 0){
 			Configuration.put("ON_CLOSE", "exit");
 		}
 		else{
 			Configuration.put("ON_CLOSE", "minimize");
 		}
-
+		assert(!Configuration.get("ON_CLOSE").toString().isEmpty()):"Empty value in ON_CLOSE";
+		
 		if(this.cmb_minimizeAction.getSelectedIndex() == 0){
 			Configuration.put("ON_MINIMIZE", "minimize");
 		}else{
 			Configuration.put("ON_MINIMIZE", "hide");
 		}
-
+		assert(!Configuration.get("ON_MINIMIZE").toString().isEmpty()):"Empty value in ON_MINIMIZE";
+		
 		String lf = Configuration.get("LOOK_AND_FEEL").toString();
 		String newlf = "";
 
@@ -816,6 +837,7 @@ public class PreferencesDialog extends JDialog {
 		else if (this.cmb_theme.getSelectedIndex() == 1){
 			newlf = "default";
 		}
+		assert(!Configuration.get("LOOK_AND_FEEL").toString().isEmpty()):"Empty value in LOOK_AND_FEEL";
 //		else if (this.cmb_theme.getSelectedIndex() == 2){
 //
 ////			newlf = this.lfClassName.getText();
@@ -863,6 +885,7 @@ public class PreferencesDialog extends JDialog {
 				&& (this.tf_soundFile.getText().trim().length() > 0)){
 			Configuration.put("NOTIFY_SOUND", this.tf_soundFile.getText().trim());
 		}
+		assert(!Configuration.get("NOTIFY_SOUND").toString().isEmpty()):"Empty value in NOTIFY_SOUND";
 
 		if (cb_antialiasing.isSelected())
 			Configuration.put("ANTIALIAS_TEXT", "yes");
@@ -1041,7 +1064,7 @@ public class PreferencesDialog extends JDialog {
 		but_apply.setEnabled(false);
 	}
 
-	Vector<String> getFontNames() {
+	public Vector<String> getFontNames() {
 		GraphicsEnvironment gEnv =
         	GraphicsEnvironment.getLocalGraphicsEnvironment();
         String envfonts[] = gEnv.getAvailableFontFamilyNames();

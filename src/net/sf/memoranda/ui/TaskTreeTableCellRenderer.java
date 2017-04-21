@@ -21,6 +21,7 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreeCellRenderer;
 
+
 public class TaskTreeTableCellRenderer extends DefaultTreeCellRenderer implements TreeCellRenderer, TableCellRenderer {
     static ImageIcon PR_HIGHEST_ICON = new ImageIcon(net.sf.memoranda.ui.AppFrame.class
             .getResource("resources/icons/pr_highest.png"));
@@ -69,12 +70,7 @@ public class TaskTreeTableCellRenderer extends DefaultTreeCellRenderer implement
                 tree, value, selected,
                 expanded, leaf, row,
                 hasFocus);
-        if (value instanceof Project){
-            return empty_panel;
-        }
-        if (!(value instanceof Task)){
-            return empty_panel;
-        }
+
         Task t = (Task) value; 
         setText(t.getText());
         setToolTipText(t.getDescription());
@@ -100,7 +96,7 @@ public class TaskTreeTableCellRenderer extends DefaultTreeCellRenderer implement
         	//label.setForeground(Color.BLUE);
         switch (t.getPriority()) {
         case Task.PRIORITY_NORMAL:
-           label.setForeground(Color.GREEN);
+
            break;
         case Task.PRIORITY_HIGHEST:
            label.setForeground(Color.RED);
