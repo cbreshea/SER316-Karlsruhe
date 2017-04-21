@@ -34,8 +34,8 @@
 	<path id="classpath">
 		<pathelement path="${build.classes.dir}"/>
 		<fileset dir="lib">
-			<include name="*.jar"/>
-			<include name="*.zip"/>
+			<include name="**/*.jar"/>
+			<include name="**/*.zip"/>
 		</fileset>
 	</path>
 	<!-- =================================================================== -->
